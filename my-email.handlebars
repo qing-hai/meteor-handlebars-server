@@ -1,0 +1,164 @@
+<p style="font-size:12px;font-family:Verdana,Arial,sans-serif">
+		<b>Dear Sir/Madam,</b>
+<br><br>
+Your recent load test finished.  
+<br>
+<a href="{{testurl}}">detailed test results.</a>
+<br><br>
+Here is a summary of the results:
+<br><br>
+
+</p><table cellspacing="0" cellpadding="3" border="1">
+	<tr>
+		<td><strong>Status<strong/></td>
+		<td class="td_nowrap">{{status}}</td>
+	</tr>
+	<tr>
+        <td><strong>Cost</strong></td>
+        <td>{{testplan.cost}}{{#if refund}}(refund {{refund}}){{/if}}</td>
+    </tr>
+	<tr>
+		 <td><strong>Test plan<strong/></td>
+		 <td>{{testplan.name}}</td>
+	</tr>
+	<tr>
+		<td><strong>Duration<strong/></td>
+		<td>{{duration}} minutes</td>
+	</tr>
+	<tr>
+		<td><strong>Started<strong/></td>
+		<td>{{actualStartTime}}</td>
+	</tr>
+	<tr>
+		<td><strong>Ended<strong/></td>
+		<td>{{actualEndTime}}</td>
+	</tr>
+	<tr>
+        <td><strong>Load Schedule</strong></td>
+        <td>starting at {{startUser}} users, finishing at {{peakUser}} users</td>
+    </tr>
+</table>
+<br>
+<table cellspacing="0" cellpadding="3" border="1">
+	<tr>
+		<td><strong>Total Transfer (bytes)<strong/></td>
+		<td>{{report.totalDataSummary.aggregate.totalTransfer}}  </td>
+	</tr>
+	<tr>
+		<td><strong>Throughout (bytes/second)<strong/></td>
+		<td><strong>average:</strong>{{report.totalDataSummary.aggregate.throughputAverage}}/s   
+			<span class="tab">
+				<strong>Peak:</strong>{{report.totalDataSummary.aggregate.throughputPeak}}/s
+			</span>
+		</td>
+	</tr>
+
+	<tr>
+		<td><strong>Total Requests<strong/></td>
+		<td>{{report.totalDataSummary.aggregate.requestStat.requestCount}}  </td>
+	</tr>
+
+	<tr>
+		<td><strong>Requests per Second<strong/></td>
+		<td><strong>average:</strong>{{report.totalDataSummary.aggregate.requestsPerSecondAverage}}/s
+			<span class="tab">
+				<strong>Peak:</strong>{{report.totalDataSummary.aggregate.requestsPerSecondPeak}}/s
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td><strong>Average Response Time<strong/></td>
+		<td>{{report.totalDataSummary.aggregate.responseTimeAverage}} <span class="tab">
+			Html: {{report.totalDataSummary.aggregate.responseHtmlTimeAverage}}
+			<span/>
+			</td>
+	</tr>
+	<tr>
+		<td><strong>Total Passed scenarios<strong/></td>
+		<td>{{report.totalDataSummary.aggregate.scenarioPassedCount}}</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong>Total Errors</strong>
+		</td>
+		<td>{{report.totalDataSummary.aggregate.scenarioErrorCount}}</td>
+	 </tr> 
+</table>
+<br>
+<p>Total passed: {{report.totalDataSummary.aggregate.scenarioPassedCount}}<span class="tab"> Total Failed: {{report.totalDataSummary.aggregate.scenarioFatalErrorCount}} </span> </p>
+<table cellspacing="0" cellpadding="3" border="1">
+	<thead>
+		<tr>
+			<th>Scenario Name</th>
+			<th>Minimum</th>
+			<th>Average</th>
+			<th>Median</th>
+			<th>Std.Deviation</th>
+			<th>90 Percent</th>
+			<th>Pass</th>
+			<th>Fail</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each regionSummaryData.aggregate.scenarioData}}
+		<tr>
+			<td>{{title}}</td>
+			<td>{{min}}</td>
+			<td>{{average}}</td>
+			<td>{{median}}</td>
+			<td>{{std_deviation}}</td>
+			<td>{{percent90}}</td>
+			<td>{{pass}}</td>
+			<td>{{fail}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<br>
+<p>Total : {{report.totalDataSummary.aggregate.scenarioErrorCount}}<span class="tab"> Fatal Error: {{report.totalDataSummary.aggregate.scenarioFatalErrorCount}} </span></p>
+{{#if scenarioErrors.length}}
+<table cellspacing="0" cellpadding="3" border="1">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Message</th>
+			<th>Count</th>
+			<th>Scenario</th>
+			<th>StepNo</th>
+			<th>StepType</th>
+			<th>fatal</th>
+			<th>Region</th>
+			<th>VuCount</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each scenarioErrors}}
+		<tr>
+			<td>{{code}}</td>
+			<td>{{message}}</td>
+			<td>{{count}}</td>
+			<td>
+				{{sc_title}}
+			</td>
+			<td>{{stepNo}}</td>
+			<td>{{stepType}}</td>
+			<td>{{fatal}}</td>
+			<td>{{region}}</td>
+			<td>{{vuCount.length}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+{{/if}}
+<br><br>
+<a href="{{testurl}}">detailed test results.</a>
+<br><br>
+If you have any questions or issues regarding LoadStorm, please contact us by email.
+<br><br>
+Thank you,
+<br><br>
+The LoadBooster Support Team
+<br>
+<a style="color:#dfb77c" href="mailto:loadbooster@163.com" target="_blank">loadbooster@163.com</a>
+<br>
